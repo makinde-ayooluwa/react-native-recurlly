@@ -1,15 +1,19 @@
-import { Text, View } from "react-native";
+import { UserContext } from "@/contexts/userContext";
+import { Redirect } from "expo-router";
+import { useContext } from "react";
+import { ActivityIndicator, Text, View } from "react-native";
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.jsx to edit this screen</Text>
-    </View>
+  const { user } = useContext(UserContext);
+  return user == null ? (
+    <>
+      <ActivityIndicator style={{ flex: 1, alignSelf: "center", justifyContent: "center" }} />
+      <Redirect href="/login" />
+    </>
+  ) : (
+    <>
+      <ActivityIndicator style={{ flex: 1, alignSelf: "center", justifyContent: "center" }} />
+      <Redirect href="/" />
+    </>
   );
 }
